@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="store">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<!-- Bootstrap linki -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	
+	<!-- jQuery -->
+	<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/redmond/jquery-ui.css">
+	<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+	
+	<!-- angularJs -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+   
+   <!-- javascript files -->
+   <script src="main.js"></script>
+    <title>Angular Course</title>
+</head>
+<body>
+   <div class="container">
+       <div class="row">
+           <div class="col-sm-6 col-sm-offset-3">
+               <h1>Gem store Products</h1>
+               <br>
+               <div class="well">
+                   Learning Angular JS  Code School online course Shaping with Angular JS 
+               </div>
+           </div>
+           <hr>
+       </div>
+       <div class="row" ng-controller="StoreController as store">
+           <div class="col-sm-6">
+              <!-- product data -->
+              <div ng-repeat="product in store.products | orderBy:'-price'">
+                  <div class="well" ng-hide="product.soldOut">
+                       <h2>
+                           {{product.name}}
+                           <span class="pull-right">{{product.price | currency}}</span>
+                      </h2>
+                       <!-- navigation -->
+                       <br>
+                       <section ng-controller="PanelController as panel">
+                           <ul class="nav nav-pills">
+                               <li ng-class="{active: panel.isSelected(1)}">
+                                   <a href ng-click="panel.selectTab(1)">Description</a>
+                               </li>
+                               <li ng-class="{active: panel.isSelected(2)}">
+                                   <a href ng-click="panel.selectTab(2)">Specification</a>
+                               </li>
+                               <li ng-class="{active: panel.isSelected(3)}">
+                                   <a href ng-click="panel.selectTab(3)">Revievs</a>
+                               </li>
+                           </ul>
+                       
+                       <hr>
+                       <button ng-show="product.canPurchase" class="btn btn-success">
+                           Add to Cart
+                       </button>
+                   <!-- tab panels -->
+                   <div class="panel" ng-show="panel.isSelected(1)">
+                       <h3>Description</h3>
+                       <p>{{product.description}}</p>
+                       
+                   </div>
+                   <div class="panel" ng-show="panel.isSelected(2)">
+                       <h4>Specifications</h4>
+                       <blockquote>None yet</blockquote>
+                   </div>
+                   <div class="panel" ng-show="panel.isSelected(3)">
+                       <h4>Reviews</h4>
+                       <blockquote>None yet</blockquote>
+                   </div>
+                   
+                   </div>
+                   </section>
+              </div>
+           </div>
+           <div class="col-sm-6"></div>
+       </div>
+   </div>
+    
+</body>
+</html>
